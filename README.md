@@ -1,6 +1,5 @@
-Выполнить команды:
+Выполнить команду:
 ```bash
-docker-compose build
 docker-compose up
 ```
 

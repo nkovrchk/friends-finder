@@ -1,16 +1,16 @@
 version: '3'
 services:
 
-  friends-finder-app:
-    build: ./friends-finder-app
-    container_name: friends-finder-app
+  backend:
+    build: ./backend
+    container_name: friends-finder-backend
     ports:
       - "8081:8081"
 
-  friends-finder-client:
-    build: ./friends-finder-client
-    container_name: friends-finder-client
+  frontend:
+    build: ./frontend
+    container_name: friends-finder-frontend
     ports:
       - "8080:8080"
     links:
-      - friends-finder-app
+      - backend
