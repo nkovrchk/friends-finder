@@ -6,6 +6,13 @@ services:
     container_name: friends-finder-backend
     ports:
       - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5436/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
   frontend:
     build: ./frontend
@@ -14,3 +21,15 @@ services:
       - "8080:8080"
     links:
       - backend
+    environment:
+      - "PROXY_URL=http://backend:8081"
+
+  db:
+    image: postgres:14.2-alpine
+    container_name: friends-finder-db
+    ports:
+      - "5436:5436"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
